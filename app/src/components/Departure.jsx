@@ -6,7 +6,7 @@ const Departure = (props) => {
     return (
         <div className="departure">
             <h1 id="destination">{destination}</h1>
-            <p id="departureTime">{departureTime}</p>
+            <h1 id="departureTime">{departureTime}</h1>
         </div>
     )
 }

@@ -1,9 +1,10 @@
 import { React, useState } from 'react';
 import config from '../../config.json';
+import Departure from './Departure';
 
 const DepartureBoard = () => {
     const [departures, setDepartures] = useState([]);
-    const stationCode = "GLC";
+    const stationCode = "KWN";
 
     const fetchDepartures = async () => {
         try {
@@ -17,9 +18,12 @@ const DepartureBoard = () => {
             const data = await response.json();
             let services = [];
             console.log('Fetched departures data:', data);
+            let count = 0
             for (const service of data.trainServices) {
+                if (count >= 5) break;
                 console.log(`Service to ${service.destination[0].locationName} at ${service.std} is ${service.status}`);
                 services.push({destination: service.destination[0].locationName, time: service.std});
+                count++;
             }
             console.log('Processed services:', services);
             setDepartures(services);
@@ -29,15 +33,15 @@ const DepartureBoard = () => {
         }
     };
 
+    fetchDepartures();
+
     return (
-        <div>
-            <h1>Departure Board</h1>
-            <button onClick={fetchDepartures}>Load Departures</button>
-            <ul>
+        <div className='departuresBoard'>
+            <ul style={{ listStyleType: 'none' }}>
                 {departures.map((departure, index) => (
-                    <li key={index}>
-                        {departure.time} - {departure.destination}
-                    </li>
+                    <div key={index}>
+                        <Departure destination={departure.destination} departureTime={departure.time} />
+                    </div>
                 ))}
             </ul>
         </div>
