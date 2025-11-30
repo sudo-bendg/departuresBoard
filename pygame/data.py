@@ -22,3 +22,11 @@ def getDeparturesData(stationCode):
 
     print(responseDict['trainServices'])
     return responseDict['trainServices']
+
+stations = {
+    "glasgow central": "GLC",
+    "kilwinning": "KWN",
+    "ayr": "AYR",
+    "edinburgh": "EDB",
+    "london euston": "EUS"
+}

@@ -42,7 +42,7 @@ def draw_section(surface, rect, left_text, right_text, font, displayDetails, alt
     surface.blit(right_surf, (x + w - right_surf.get_width() - PADDING - BORDER_WIDTH, right_y))
 
 def update_api_data():
-    departures = data.getDeparturesData("GLC")
+    departures = data.getDeparturesData(data.stations[STATION])
 
     departuresData = []
 
