@@ -10,4 +10,4 @@ SCREEN_BG = (0, 0, 0)
 FONT_SIZE = 32
 FPS = 60
 
-STATION = "london euston"
+STATION = "kilwinning"
