@@ -26,12 +26,12 @@ def draw_section(surface, rect, left_text, right_text, font, displayDetails, alt
 
     if (displayDetails and alt_right_text):
         right_surf = font.render(alt_right_text, True, TEXT_COLOR)
-        if alt_right_text.lower() != "on time":
+        if isinstance(alt_right_text, str) and alt_right_text.lower() != "on time":
             right_surf = font.render(F"EXPECTED {alt_right_text}", True, TEXT_COLOR)
     else:
         right_surf = font.render(right_text, True, TEXT_COLOR)
 
-    if alt_right_text.lower() == "cancelled":
+    if isinstance(alt_right_text, str) and alt_right_text.lower() == "cancelled":
         left_surf = font.render(left_text, True, DANGER_COLOR)
         right_surf = font.render("CANCELLED", True, DANGER_COLOR)
 
@@ -59,8 +59,10 @@ def update_api_data():
     return departuresData
 
 def setup_api_timer():
-    """Start a repeating 60s timer event."""
     pygame.time.set_timer(API_UPDATE_EVENT, UPDATE_INTERVAL_MS)
 
 def setup_display_type_timer():
     pygame.time.set_timer(DISPLAY_TYPE_EVENT, DISPLAY_TYPE_MS)
+
+def get_station_options():
+    return list(data.stations.keys())[:SECTION_COUNT]
