@@ -19,9 +19,12 @@ def getDeparturesData(stationCode):
 
     #print(response.text)
     responseDict = json.loads(response.text)
-
-    print(responseDict['trainServices'])
-    return responseDict['trainServices']
+    services = responseDict.get('trainServices')
+    if services is None:
+        services = responseDict.get('busServices', [])
+        print('Using busServices fallback')
+    print(services)
+    return services
 
 stations = {
     "glasgow central": "GLC",
